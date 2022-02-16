@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:search_prototype/widgets/home_widgets/search_delegate.dart';
-
-import '../../viewmodels/search_viewmodel.dart';
+import 'package:search_prototype/helpers/search.dart';
 
 class TitleBar extends StatelessWidget {
   const TitleBar({Key? key}) : super(key: key);
@@ -46,7 +43,7 @@ class _TrailingWidgets extends StatelessWidget {
     return Row(
       children: [
         IconButton(
-          onPressed: () => _onSearchPressed(context),
+          onPressed: () => SearchHelper()..onSearchPressed(context),
           icon: const Icon(Icons.search),
         ),
         IconButton(
@@ -63,15 +60,6 @@ class _TrailingWidgets extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  void _onSearchPressed(BuildContext context) async {
-    final _history = context.read<SearchViewModel>().getSearchHistory();
-    final result =
-        await showSearch(context: context, delegate: Search(history: _history));
-    if (result != null && result.toString().trim() != '') {
-      context.read<SearchViewModel>().addToSeachHistory(result);
-    }
   }
 }
 
