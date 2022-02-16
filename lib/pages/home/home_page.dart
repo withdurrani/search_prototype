@@ -15,10 +15,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _userHasSearched =
         context.select((SearchViewModel vm) => vm.userHasSearched);
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: _userHasSearched ? const _SearchScreen() : const _HomeScreen(),
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(12),
+          child: _userHasSearched ? const _SearchScreen() : const _HomeScreen(),
+        ),
       ),
     );
   }
